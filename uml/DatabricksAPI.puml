@@ -1,0 +1,85 @@
+@startuml
+'https://plantuml.com/class-diagram
+allowmixing
+'left to right direction
+skinparam DefaultFontName "Open Sans"
+skinparam rectangle {
+    roundCorner<<Concept>> 25
+}
+
+title
+| Title: | Databricks Python SDK |
+| As of  | %date("YYYY-MM-dd") |
+| PlantUML Version | %version() |
+end title
+
+class AccountClient {
+    account_url
+}
+
+class account_iam
+class acct_unity_catalog
+class acct_settings
+class provisioning
+class billing
+class oauth
+
+
+class WorkspaceClient {
+    host: str = None,
+    account_id: str = None
+    username: str = None
+    password: str = None
+    client_id: str = None
+    client_secret: str = None
+    token: str = None
+    profile: str = None
+    config_file: str = None
+    ' azure_workspace_resource_id: str = None
+    ' azure_client_secret: str = None
+    ' azure_client_id: str = None
+    ' azure_tenant_id: str = None
+    ' azure_environment: str = None
+    auth_type: str = None
+    cluster_id: str = None
+    ' google_credentials: str = None
+    ' google_service_account: str = None
+    debug_truncate_bytes: int = None
+    debug_headers: bool = None
+    product='unknown'
+    product_version='0.0.0'
+    credentials_provider: CredentialsProvider = None
+    config: Config = None
+}
+
+class AccessControlRequest {
+    group_name
+    permission_level
+    service_principal_name
+    user_name
+    as_dict()
+    from_dict(): classmethod
+}
+
+class AccessControlResponse {
+    all_permissions: List
+    display_name: String
+    service_principal_name: String
+    user_name: String
+    as_dict()
+}
+
+class ComplexValue {
+    display: String
+    primary: Boolean
+    type: String
+    as_dict()
+    from_dict(): classmethod
+}
+
+'WorkspaceClient <|-- ComplexValue
+'WorkspaceClient <|-- AccessControlRequest
+'WorkspaceClient <|-- AccessControlResponse
+
+
+@enduml

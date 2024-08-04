@@ -1,0 +1,503 @@
+@startuml onboarding
+'https://plantuml.com/activity-diagram-beta
+allowmixing
+left to right direction
+skinparam DefaultFontName "Open Sans"
+skinparam rectangle {
+    roundCorner<<Concept>> 25
+}
+
+title
+| Title: | Databricks Administration: Onboarding|
+| As of  | %date("YYYY-MM-dd") |
+| PlantUML Version | %version() |
+end title
+
+note "I think there are three levels of permissions, entitlements and UC" as N1
+
+footer Notes: Workspace Admin operations will follow a different worksflow
+
+' https://docs.databricks.com/en/data-governance/unity-catalog/manage-privileges/privileges.html#privilege-types-by-securable-object-in-unity-catalog
+' ALL PRIVILEGES, APPLY TAG, CREATE SCHEMA, USE CATALOG
+' CREATE FUNCTION, CREATE TABLE, CREATE MODEL, CREATE VOLUME, CREATE FOREIGN CATALOG, READ VOLUME, WRITE VOLUME, EXECUTE, MODIFY, SELECT, USE SCHEMA
+package unity_catalog_metastore {
+            json unity_catalog_grants {
+                  "dt_analytics_dev_catalog": {
+    "CATALOG GRANTS": {
+      "admin": [
+        "ALL PRIVILEGES"
+      ],
+      "mle_ds_lead": {
+        "APPLY TAG": false,
+        "CREATE SCHEMA": false,
+        "USE CATALOG": true,
+        "CREATE FUNCTION": false,
+        "CREATE TABLE": false,
+        "CREATE MODEL": false,
+        "CREATE VOLUME": false,
+        "CREATE FOREIGN CATALOG": false,
+        "READ VOLUME": false,
+        "WRITE VOLUME": false,
+        "EXECUTE": false,
+        "MODIFY": false,
+        "SELECT": false,
+        "USE SCHEMA": false
+      },
+      "mle_ds": {
+        "APPLY TAG": false,
+        "CREATE SCHEMA": false,
+        "USE CATALOG": true,
+        "CREATE FUNCTION": false,
+        "CREATE TABLE": false,
+        "CREATE MODEL": false,
+        "CREATE VOLUME": false,
+        "CREATE FOREIGN CATALOG": false,
+        "READ VOLUME": false,
+        "WRITE VOLUME": false,
+        "EXECUTE": false,
+        "MODIFY": false,
+        "SELECT": false,
+        "USE SCHEMA": false
+      },
+      "data_engineer": [
+        "USE CATALOG"
+      ],
+      "bi_analyst": [
+        "USE CATALOG"
+      ]
+    },
+    "SCHEMA: sbs_analytics": {
+      "admin": [
+        "ALL PRIVILEGES"
+      ],
+      "mle_ds_lead": {
+        "APPLY TAG": true,
+        "CREATE SCHEMA": true,
+        "USE CATALOG": true,
+        "CREATE FUNCTION": true,
+        "CREATE TABLE": true,
+        "CREATE MODEL": true,
+        "CREATE VOLUME": false,
+        "CREATE FOREIGN CATALOG": false,
+        "READ VOLUME": true,
+        "WRITE VOLUME": true,
+        "EXECUTE": true,
+        "MODIFY": true,
+        "SELECT": true,
+        "USE SCHEMA": true
+      },
+      "mle_ds": {
+        "APPLY TAG": false,
+        "CREATE SCHEMA": false,
+        "USE CATALOG": true,
+        "CREATE FUNCTION": true,
+        "CREATE TABLE": false,
+        "CREATE MODEL": true,
+        "CREATE VOLUME": false,
+        "CREATE FOREIGN CATALOG": false,
+        "READ VOLUME": true,
+        "WRITE VOLUME": true,
+        "EXECUTE": true,
+        "MODIFY": false,
+        "SELECT": true,
+        "USE SCHEMA": true
+      },
+      "bi_analyst": {
+        "APPLY TAG": false,
+        "CREATE SCHEMA": false,
+        "USE CATALOG": true,
+        "CREATE FUNCTION": false,
+        "CREATE TABLE": false,
+        "CREATE MODEL": false,
+        "CREATE VOLUME": false,
+        "CREATE FOREIGN CATALOG": false,
+        "READ VOLUME": true,
+        "WRITE VOLUME": true,
+        "EXECUTE": true,
+        "MODIFY": false,
+        "SELECT": true,
+        "USE SCHEMA": true
+      },
+      "SCHEMA: sbs_analytics": {
+        "admin": [
+          "ALL PRIVILEGES"
+        ],
+        "mle_ds_lead": {
+          "APPLY TAG": true,
+          "CREATE SCHEMA": true,
+          "USE CATALOG": true,
+          "CREATE FUNCTION": true,
+          "CREATE TABLE": true,
+          "CREATE MODEL": true,
+          "CREATE VOLUME": false,
+          "CREATE FOREIGN CATALOG": false,
+          "READ VOLUME": true,
+          "WRITE VOLUME": true,
+          "EXECUTE": true,
+          "MODIFY": true,
+          "SELECT": true,
+          "USE SCHEMA": true
+        },
+        "mle_ds": {
+          "APPLY TAG": false,
+          "CREATE SCHEMA": false,
+          "USE CATALOG": true,
+          "CREATE FUNCTION": true,
+          "CREATE TABLE": false,
+          "CREATE MODEL": true,
+          "CREATE VOLUME": false,
+          "CREATE FOREIGN CATALOG": false,
+          "READ VOLUME": true,
+          "WRITE VOLUME": true,
+          "EXECUTE": true,
+          "MODIFY": false,
+          "SELECT": true,
+          "USE SCHEMA": true
+        },
+        "bi_analyst": {
+          "APPLY TAG": false,
+          "CREATE SCHEMA": false,
+          "USE CATALOG": true,
+          "CREATE FUNCTION": false,
+          "CREATE TABLE": false,
+          "CREATE MODEL": false,
+          "CREATE VOLUME": false,
+          "CREATE FOREIGN CATALOG": false,
+          "READ VOLUME": true,
+          "WRITE VOLUME": true,
+          "EXECUTE": true,
+          "MODIFY": false,
+          "SELECT": true,
+          "USE SCHEMA": true
+        }
+      }
+    }
+  }
+            }
+
+
+        folder dt_analytics_dev_catalog {
+            database user_volumes_schema {
+            card user_volumes [
+            USER VOLUMES
+            ---
+            ryan_hammang
+            ---
+            jayson_backes
+            ---
+            Yasaman Panjebandpour
+            ---
+            ...
+            ---
+            Zehua Li
+            ]
+            database "sbs_analytics" as sbs_analytics_dev {
+                entity store_attributes {
+                    store_code: string
+                    store_name: string
+                    store_zipcode: string
+                }
+                entity noaa_weather {
+                    date: date
+                    station: string
+                    tmax: int
+                    tmin: int
+                    prcp: int
+                    snow: int
+                    snwd: int
+                }
+                entity invoices {
+                    invoice_id: int
+                    store_code: string
+                    customer_id: int
+                    invoice_date: date
+                    invoice_total: int
+                }
+            }
+
+    }
+    rectangle sbs_prod_catalog {
+        folder dt_analytics_schema {
+            database "sbs_analytics" as sbs_analytics_prod {
+                entity store_attributes {
+                    store_code: string
+                    store_name: string
+                    store_zipcode: string
+                }
+                entity noaa_weather {
+                    date: date
+                    station: string
+                    tmax: int
+                    tmin: int
+                    prcp: int
+                    snow: int
+                    snwd: int
+                }
+                entity invoices {
+                    invoice_id: int
+                    store_code: string
+                    customer_id: int
+                    invoice_date: date
+                    invoice_total: int
+                }
+            }
+        }
+    }
+}
+
+class "Databricks Account" as dbrx_account {
+    + "Workspace Admin"
+    + "Workspace User"
+    + "Service Principal"
+    + "Databricks Hosted Notebook"
+    + "Databricks Hosted ML Model"
+    + "Databricks Hosted ML Pipeline"
+    + "Databricks Hosted ML Model Endpoint"
+    + "Databricks Hosted ML Model Endpoint"
+    + "Databricks Hosted ML Model Endpoint"
+    + "Databricks Host
+}
+
+json WorkspaceGroups {
+  "groups": {
+    "admin": {
+      "group_description": "Workspace Administrators",
+      "permissions": {
+        "clusters": "<b><color:red><b><color:red>CAN_MANAGE</b>",
+        "cluster_policies": "<b><color:red><b><color:red>CAN_MANAGE</b>",
+        "delta_live_tables_pipelines": "<b><color:red><b><color:red>CAN_MANAGE</b>",
+        "jobs": "<b><color:red><b><color:red>CAN_MANAGE</b>",
+        "mlflow_experiments": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_registered_models": "<b><color:red>CAN_MANAGE</b>",
+        "passwords": "<b><color:red>CAN_MANAGE</b>",
+        "instance_pools": "<b><color:red>CAN_MANAGE</b>",
+        "repos": "<b><color:red>CAN_MANAGE</b>",
+        "serve_endpoints": "<b><color:red>CAN_MANAGE</b>",
+        "sql_warehouses": "<b><color:red>CAN_MANAGE</b>",
+        "tokens": "<b><color:red>CAN_MANAGE</b>",
+        "secret_scopes": "<b><color:red>CAN_MANAGE</b>",
+        "workspaces": "<b><color:red>CAN_MANAGE</b>",
+        "users": "<b><color:red>CAN_MANAGE</b>",
+        "groups": "<b><color:red>CAN_MANAGE</b>",
+        "roles": "<b><color:red>CAN_MANAGE</b>"
+      },
+        "entitlements": {
+        "allow_cluster_create": true,
+        "allow_instance_pool_create": true,
+        "allow_job_create": true,
+        "allow_mlflow_experiment_create": true,
+        "allow_mlflow_registered_model_create": true,
+        "allow_repo_create": true,
+        "allow_serve_endpoint_create": true,
+        "allow_sql_warehouse_create": true,
+        "allow_token_create": true,
+        "allow_workspace_create": true,
+        "allow_user_create": true,
+        "allow_group_create": true,
+        "allow_role_create": true
+      }
+    }
+  },
+      "mle_ds_lead": {
+      "group_description": "MLE Data Scientist Leads",
+      "permissions": {
+        "clusters": "<b><color:red>CAN_MANAGE</b>",
+        "cluster_policies": "<b><color:green>CAN_VIEW</b>",
+        "delta_live_tables_pipelines": "<b><color:red>CAN_MANAGE</b>",
+        "jobs": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_experiments": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_registered_models": "<b><color:red>CAN_MANAGE</b>",
+        "passwords": "<i>no_access</i>",
+        "instance_pools": "<i>no_access</i>",
+        "repos": "<b><color:red>CAN_MANAGE</b>",
+        "serve_endpoints": "<b><color:red>CAN_MANAGE</b>",
+        "sql_warehouses": "<b><color:red>CAN_MANAGE</b>",
+        "tokens": "<b><color: orange>CAN_USE</b>",
+        "secret_scopes": "<b><color:orange>CAN_USE</b>",
+        "workspaces": "<b><color:orange>CAN_USE</b>",
+        "users": "<i>no_access</i>",
+        "groups": "<i>no_access</i>",
+        "roles": "<i>no_access</i>"
+      },
+      "entitlements": {
+        "allow_cluster_create": true,
+        "allow_instance_pool_create": true,
+        "allow_job_create": true,
+        "allow_mlflow_experiment_create": true,
+        "allow_mlflow_registered_model_create": true,
+        "allow_repo_create": true,
+        "allow_serve_endpoint_create": true,
+        "allow_sql_warehouse_create": true,
+        "allow_token_create": true,
+        "allow_workspace_create": false,
+        "allow_user_create": false,
+        "allow_group_create": false,
+        "allow_role_create": false
+      }
+    },
+      "deployer": {
+      "group_description": "Deployers",
+      "permissions": {
+        "clusters": "<b><color:red>CAN_MANAGE</b>",
+        "cluster_policies": "<b><color:green>CAN_VIEW</b>",
+        "delta_live_tables_pipelines": "<b><color:red>CAN_MANAGE</b>",
+        "jobs": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_experiments": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_registered_models": "<b><color:red>CAN_MANAGE</b>",
+        "passwords": "<i>no_access</i>",
+        "instance_pools": "<i>no_access</i>",
+        "repos": "<b><color:orange>CAN_USE</b>",
+        "serve_endpoints": "<b><color:red>CAN_MANAGE</b>",
+        "sql_warehouses": "<b><color:red>CAN_MANAGE</b>",
+        "tokens": "<b><color: orange>CAN_USE</b>",
+        "secret_scopes": "<b><color:orange>CAN_USE</b>",
+        "workspaces": "<b><color:orange>CAN_USE</b>",
+        "users": "<i>no_access</i>",
+        "groups": "<i>no_access</i>",
+        "roles": "<i>no_access</i>"
+      },
+      "entitlements": {
+        "allow_cluster_create": true,
+        "allow_instance_pool_create": true,
+        "allow_job_create": true,
+        "allow_mlflow_experiment_create": true,
+        "allow_mlflow_registered_model_create": true,
+        "allow_repo_create": false,
+        "allow_serve_endpoint_create": true,
+        "allow_sql_warehouse_create": true,
+        "allow_token_create": false,
+        "allow_workspace_create": false,
+        "allow_user_create": false,
+        "allow_group_create": false,
+        "allow_role_create": false
+      }
+    },
+      "mle_ds": {
+      "group_description": "Machine Learning Engineer Data Scientist",
+      "permissions": {
+        "clusters": "<b><color:red>CAN_MANAGE</b>",
+        "cluster_policies": "<b><color:green>CAN_VIEW</b>",
+        "delta_live_tables_pipelines": "<b><color:red>CAN_MANAGE</b>",
+        "jobs": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_experiments": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_registered_models": "<b><color:red>CAN_MANAGE</b>",
+        "passwords": "<i>no_access</i>",
+        "instance_pools": "<i>no_access</i>",
+        "repos": "<b><color:red>CAN_MANAGE</b>",
+        "serve_endpoints": "<b><color:red>CAN_MANAGE</b>",
+        "sql_warehouses": "<b><color:red>CAN_MANAGE</b>",
+        "tokens": "<b><color: orange>CAN_USE</b>",
+        "secret_scopes": "<b><color:orange>CAN_USE</b>",
+        "workspaces": "<b><color:orange>CAN_USE</b>",
+        "users": "<i>no_access</i>",
+        "groups": "<i>no_access</i>",
+        "roles": "<i>no_access</i>"
+      },
+      "entitlements": {
+        "allow_cluster_create": false,
+        "allow_instance_pool_create": false,
+        "allow_job_create": true,
+        "allow_mlflow_experiment_create": true,
+        "allow_mlflow_registered_model_create": true,
+        "allow_repo_create": false,
+        "allow_serve_endpoint_create": false,
+        "allow_sql_warehouse_create": false,
+        "allow_token_create": true,
+        "allow_workspace_create": false,
+        "allow_user_create": false,
+        "allow_group_create": false,
+        "allow_role_create": false
+      }
+    },
+      "bi_analyst": {
+      "group_description": "Business Intelligence Analyst",
+      "permissions": {
+        "clusters": "<b><color:orange>CAN_ATTACH_TO</b>",
+        "cluster_policies": "<b><color:green>CAN_VIEW</b>",
+        "delta_live_tables_pipelines": "<b><color:green>CAN_VIEW</b>",
+        "jobs": "<i>no_access</i>",
+        "mlflow_experiments": "<i>no_access</i>",
+        "mlflow_registered_models": "<i>no_access</i>",
+        "passwords": "<i>no_access</i>",
+        "instance_pools": "<i>no_access</i>",
+        "repos": "<i>no_access</i>",
+        "serve_endpoints": "<i>no_access</i>",
+        "sql_warehouses": "<b><color:green>CAN_VIEW</b>",
+        "tokens": "<b><color:green>CAN_VIEW</b>",
+        "secret_scopes": "<i>no_access</i>",
+        "workspaces": "<i>no_access</i>",
+        "users": "<i>no_access</i>",
+        "groups": "<i>no_access</i>",
+        "roles": "<i>no_access</i>"
+      },
+      "entitlements": {
+        "allow_cluster_create": false,
+        "allow_instance_pool_create": false,
+        "allow_job_create": false,
+        "allow_mlflow_experiment_create": false,
+        "allow_mlflow_registered_model_create": false,
+        "allow_repo_create": false,
+        "allow_serve_endpoint_create": false,
+        "allow_sql_warehouse_create": false,
+        "allow_token_create": false,
+        "allow_workspace_create": false,
+        "allow_user_create": false,
+        "allow_group_create": false,
+        "allow_role_create": false
+      }
+    },
+      "data_engineer": {
+      "group_description": "Data Engineer",
+      "permissions": {
+        "clusters": "<b><color:red>CAN_MANAGE</b>",
+        "cluster_policies": "<b><color:green>CAN_VIEW</b>",
+        "delta_live_tables_pipelines": "<b><color:green>CAN_VIEW</b>",
+        "jobs": "<b><color:red>CAN_MANAGE</b>",
+        "mlflow_experiments": "<i>no_access</i>",
+        "mlflow_registered_models": "<i>no_access</i>",
+        "passwords": "<i>no_access</i>",
+        "instance_pools": "<i><color:orange>CAN_USE</i>",
+        "repos": "<b><color:orange>CAN_USE</b>",
+        "serve_endpoints": "<b><color:red>CAN_MANAGE</b>",
+        "sql_warehouses": "<b><color:red>CAN_MANAGE</b>",
+        "tokens": "<b><color: orange>CAN_USE</b>",
+        "secret_scopes": "<b><color:orange>CAN_USE</b>",
+        "workspaces": "<b><color:orange>CAN_USE</b>",
+        "users": "<i>no_access</i>",
+        "groups": "<i>no_access</i>",
+        "roles": "<i>no_access</i>"
+      },
+      "entitlements": {
+        "allow_cluster_create": false,
+        "allow_instance_pool_create": false,
+        "allow_job_create": false,
+        "allow_mlflow_experiment_create": false,
+        "allow_mlflow_registered_model_create": false,
+        "allow_repo_create": false,
+        "allow_serve_endpoint_create": false,
+        "allow_sql_warehouse_create": false,
+        "allow_token_create": false,
+        "allow_workspace_create": false,
+        "allow_user_create": false,
+        "allow_group_create": false,
+        "allow_role_create": false
+      }
+    },
+  "another_group": false
+}
+
+rectangle "Service Now Access Request" as sn_access_request
+rectangle OKTA_Group
+
+
+actor "MLE and DS" as mle_ds_group
+actor "Data Engineer" as data_engineer_group
+actor "BI Analyst" as bi_analyst_group
+actor "Deployer" as deployer_group
+actor "MLE and DS Lead" as mle_ds_lead_group
+
+WorkspaceGroups --> mle_ds_group
+sn_access_request --> OKTA_Group
+OKTA_Group --> dbrx_account
+
+@enduml

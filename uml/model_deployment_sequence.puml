@@ -1,0 +1,81 @@
+@startuml
+skinparam DefaultFontName "Open Sans"
+
+actor "Customer\nBehavior" as activity
+participant "DTC\nData" as data
+activity --> data: creates
+
+activate data
+actor "SBS" as sbs
+participant "Business\nUsecase/Problem\nDefinition" as biz_case
+
+box Data_Science_Ownership #lightgreen
+actor "Data Scientist" as ds
+participant "Exploratory\nData\nAnalysis" as eda
+participant "Experiment" as exp
+participant "Experiment\nRUN_ID" as run
+end box
+box MLE_Ownership #lightblue
+actor "ML Engineer" as mle
+participant "Machine\nLearning\nPipeline" as pipe
+participant "Model\nPerformance\nDashboard" as dash
+participant "Machine\nLearning\nPipeline" as pipe
+participant "Model\nPerformance\nDashboard" as dash
+
+data --> sbs: inspires
+sbs --> biz_case: defines
+activate biz_case
+
+biz_case --> ds: hypothesize
+ds <--> biz_case: Collaborative\nRefinement
+ds --> eda: Explore
+biz_case --> ds: hypothesize
+ds <-- eda: Create\nFeatures/Labels
+ds --> exp: Experiment Design (DOE)
+activate exp
+exp --> run: start: run_id=1
+exp <-- run: evaluate: run_id=1
+exp --> run: start: run_id=2
+exp <-- run: evaluate: run_id=2
+exp --> run: start: run_id=3
+exp <-- run: evaluate: run_id=3
+exp --> run: start: run_id=n
+exp <-- run: evaluate: run_id=n
+exp --> ds: Interpret:\nSHAP/LIME Charts, etc.
+deactivate exp
+ds --> biz_case: Evaluate:\nsuccess/failure
+biz_case --> sbs: Iterate:\nAccept/Reject
+sbs --> data: Request Data Refinement
+deactivate data
+deactivate biz_case
+
+ds --> mle: Provide Pipeline Requirements
+mle --> pipe: Build and Configure Featurization Pipeline
+activate pipe #green
+ds --> mle: Request Feature Refresh
+mle --> pipe: Trigger/Adjust Feature Refresh Config
+deactivate pipe
+
+mle --> pipe: Build and Configure Training Pipeline
+activate pipe #silver
+ds --> mle: Request Retraining
+mle --> pipe: Trigger/Adjust Retraining Config
+deactivate pipe
+
+ds --> mle: Request RUN_ID for promotion to Stage or Prod
+mle --> pipe: Build and Configure Inferencing Pipeline
+activate pipe #pink
+ds --> mle: Request promotion to Stg/Prod
+mle --> pipe: Trigger/Adjust Inferencing Config
+deactivate pipe
+
+pipe --> dash: Model Performance Metadata
+activate dash #goldenrod
+dash --> ds: Model Drift Metrics
+dash --> ds: Data Drift Metrics
+deactivate dash
+
+pipe --> dash: Pipeline Performance Metadata
+activate dash #yellow
+dash --> mle: Inference Latency, Computational Performance
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+class Account
+class Workspace
+class UnityCatalog
+@enduml

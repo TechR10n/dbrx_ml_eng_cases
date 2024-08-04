@@ -1,0 +1,121 @@
+@startuml
+allowmixing
+left to right direction
+title Flight Delay Prediction (Databricks First)
+
+json JSON {
+   "fruit":"Apple",
+   "size":"Large",
+   "color": ["Red", "Green"]
+}
+
+object feature_store {
+    event_id
+    airline_code
+    flight_num
+    origin_airport
+    origin_airport_precipitation
+    origin_airport_data_1
+    origin_airport_data_2
+    origin_airport_data_3
+    destination_airport
+    destination_airport_precipitation
+    destination_airport_data_1
+    destination_airport_data_2
+    destination_airport_data_3
+}
+
+rectangle noaa_gov {
+    rectangle weather_stations
+    rectangle aux_weather_codes
+}
+
+rectangle dept_transport {
+    rectangle L_AIRLINE_ID
+    rectangle L_AIRPORT
+    rectangle L_AIRPORT_ID
+    rectangle L_AIRPORT_SEQ_ID
+    rectangle L_BRANDED_CODE_SHARE
+    rectangle L_CANCELLATION
+    rectangle L_CITY_MARKET_ID
+}
+
+rectangle flightaware_data {
+    rectangle flight_data_stream
+}
+
+rectangle landing_zone {
+    rectangle aux_select_weather_stations
+    rectangle raw_airport_lookup
+    rectangle raw_airline_lookup
+    rectangle raw_flight_data_stream
+    rectangle raw_weather_stations
+    rectangle raw_aux_weather_codes
+}
+
+rectangle refined_zone {
+    rectangle denormalized_combined_weather_data
+    rectangle denormalized_combined_flight_data
+}
+
+raw_airline_lookup --> denormalized_combined_flight_data
+raw_airport_lookup --> denormalized_combined_flight_data
+raw_flight_data_stream --> denormalized_combined_flight_data
+
+raw_weather_stations --> denormalized_combined_weather_data
+raw_aux_weather_codes --> denormalized_combined_weather_data
+
+denormalized_combined_flight_data --> flight_delays_data
+denormalized_combined_weather_data --> weather_data_set
+
+queue land_weather_stations
+queue land_aux_weather_codes
+queue land_airport_lookup
+queue land_airline_lookup
+queue land_flight_data_stream
+
+flight_data_stream --> land_flight_data_stream
+weather_stations --> land_weather_stations
+aux_weather_codes --> land_aux_weather_codes
+airport_lookup --> land_airport_lookup
+airline_lookup --> land_airline_lookup
+
+
+land_weather_stations --> raw_weather_stations
+land_flight_data_stream --> raw_flight_data_stream
+land_aux_weather_codes --> raw_aux_weather_codes
+land_airport_lookup --> raw_airport_lookup
+land_airline_lookup --> raw_airline_lookup
+
+
+'rectangle online_feature_store
+
+
+'flight_data_noaa -down-> weather_data_noaa
+flight_delays_data --> project_columns
+project_columns --> convert_categorical_features
+convert_categorical_features --> round_down_to_full_hour
+round_down_to_full_hour --> join_weather_and_to_origin_airport
+weather_data_set --> handle_missing_values
+handle_missing_values --> exclude_some_features
+exclude_some_features --> clean_missing_data
+execute_r_script --> join_weather_and_to_origin_airport
+join_weather_and_to_origin_airport --> join_weather_and_at_destination_airport
+join_weather_and_at_destination_airport --> group_data_into_bins
+group_data_into_bins --> split_data_use_apr_aug_for_training
+group_data_into_bins --> apply_transformations_test_data
+split_data_use_apr_aug_for_training --> select_columns_in_dataset
+two_class_logistic_regression --> tune_model_hyperparameters_2_class_logistic_regression
+apply_transformations_test_data --> tune_model_hyperparameters_2_class_logistic_regression
+select_columns_in_dataset --> tune_model_hyperparameters_2_class_logistic_regression
+select_columns_in_dataset --> tune_model_hyperparameters_2_class_boosted_trees
+two_class_boosted_trees --> tune_model_hyperparameters_2_class_boosted_trees
+tune_model_hyperparameters_2_class_boosted_trees --> score_model_2_class_boosted_trees
+tune_model_hyperparameters_2_class_logistic_regression --> score_model_2_class_logistic_regression
+
+score_model_2_class_boosted_trees --> select_columns_in_2_class_boosted_dataset
+score_model_2_class_logistic_regression --> select_columns_in_2_class_logistic_regression_dataset
+select_columns_in_2_class_boosted_dataset --> join_airport_codes_dataset
+select_columns_in_2_class_logistic_regression_dataset --> join_airport_codes_dataset
+
+@enduml

@@ -1,0 +1,16 @@
+@startgantt
+[Prototype design] as [D] requires 15 days
+[Test prototype] as [T] requires 10 days
+[T] starts at [D]'s end
+[dim_store] requires 1 days
+[dim_store_gather_reqs] requires 1 days
+[dim_store_build_etl] requires 1 days
+[dim_store_build_workflow] requires 1 days
+[dim_store_implement_dashboard] requires 1 days
+
+[dim_store_gather_reqs] starts at [dim_store]'s end
+[dim_store_build_etl] starts at [dim_store_gather_reqs]'s end
+[dim_store_build_workflow] starts at [dim_store_build_etl]'s end
+[dim_store_implement_dashboard] starts at [dim_store_build_workflow]'s end
+
+@endgantt
