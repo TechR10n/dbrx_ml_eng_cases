@@ -20,5 +20,5 @@ Director_of_Data_Science --> Engineer : We need MLOps in the Cloud!
 
 Engineer --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
 Director_of_Data_Science --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
-' comment to test git-lfs
+
 @enduml
