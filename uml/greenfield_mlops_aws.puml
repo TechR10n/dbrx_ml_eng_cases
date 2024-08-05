@@ -3,11 +3,22 @@
 
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+' Alice -> Bob: Authentication Request
+' Bob --> Alice: Authentication Response
 
-Alice -> Bob: Another authentication Request
-' comment
-' comment 1
-Alice <-- Bob: another authentication Response
+' Alice -> Bob: Another authentication Request
+' Alice <-- Bob: another authentication Response
+Director_of_Data_Science --> Engineer : It's broken, fix it, now!
+Engineer --> Director_of_Data_Science : Did you make the changes that we talked about on Tuesday?
+Director_of_Data_Science --> Engineer : No, there were more configs that the customer wanted on Wednesday \n Can we please just make it work? We have to present tomorrow?
+Engineer --> Director_of_Data_Science : Sure, the customer comes first, and customer is always right.
+Engineer --> Director_of_Data_Science : Okay, we made the fix :)
+
+Director_of_Data_Science --> Engineer : Well, it works on my Laptop
+Engineer --> Director_of_Data_Science : Would it be possible for us to collaborate in a Cloud Environment?
+Director_of_Data_Science --> Engineer : We need MLOps in the Cloud!
+
+Engineer --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
+Director_of_Data_Science --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
+
 @enduml
