@@ -1,8 +1,89 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+left to right direction
+skinparam linetype ortho
+' autonumber
 
-autonumber
+rectangle "identify email spam" as spam
+rectangle "sort products in catalog" as product_catalog
+rectangle "identify loans that will default" as loan_default
+rectangle "Assign customers to customer clusters" as customer_clustering
+rectangle sentiment_analysis
+rectangle fraud_detection
+rectangle customer_ad_targeting
+rectangle churn_prediction
+rectangle support_case_flagging
+rectangle content_personalization
+rectangle detect_manufacturing_defect
+rectangle customer_segmentation
+rectangle event_discovery
+rectangle genomics
+rectangle drug_efficacy
 
+rectangle classification
+rectangle regression
+rectangle recommendation
+rectangle imputation
+
+rectangle Decision_Tree
+rectangle Naive_Bayes
+rectangle Logistic_Regression_w_threshold
+rectangle support_vector_machine
+
+spam --> classification
+product_catalog --> classification
+loan_default --> classification
+customer_clustering --> classification
+sentiment_analysis --> classification
+fraud_detection --> classification
+customer_ad_targeting --> classification
+churn_prediction --> classification
+support_case_flagging --> classification
+content_personalization --> classification
+detect_manufacturing_defect --> classification
+customer_segmentation --> classification
+event_discovery --> classification
+genomics --> classification
+drug_efficacy --> classification
+
+
+
+classification --> Decision_Tree
+classification --> Naive_Bayes
+classification --> Logistic_Regression_w_threshold
+classification --> support_vector_machine
+
+
+rectangle stock_market_prediction
+rectangle demand_forecasting
+rectangle price_estimation
+rectangle ad_bid_optimization
+rectangle risk_management
+rectangle asset_management
+rectangle weather_forecasting
+rectangle sports_prediction
+rectangle predict_ad_word_value
+rectangle p_of_loan_default
+rectangle how_much_lift_from_ad_spend
+
+rectangle linear_regression
+rectangle logistic_regression
+
+
+stock_market_prediction --> regression
+demand_forecasting --> regression
+price_estimation --> regression
+ad_bid_optimization --> regression
+risk_management --> regression
+asset_management --> regression
+weather_forecasting --> regression
+sports_prediction --> regression
+predict_ad_word_value --> regression
+p_of_loan_default --> regression
+how_much_lift_from_ad_spend --> regression
+
+regression --> linear_regression
+regression --> logistic_regression
 
 
 '## Task 1
@@ -41,17 +122,26 @@ autonumber
 ' ### Read previous versions of the delta table
   'Demonstrate the ability to read data from a specific version of the Delta table.
   'Replace the timestamp in the code with the actual version or timestamp of interest.
-Director_of_Data_Science --> Engineer : It's broken, fix it, now!
-Engineer --> Director_of_Data_Science : Did you make the changes that we talked about on Tuesday?
-Director_of_Data_Science --> Engineer : No, there were more configs that the customer wanted on Wednesday \n Can we please just make it work? We have to present tomorrow?
-Engineer --> Director_of_Data_Science : Sure, the customer comes first, and customer is always right.
-Engineer --> Director_of_Data_Science : Okay, we made the fix :)
+' data_scientist --> bronze_table : read raw data from Bronze
 
-Director_of_Data_Science --> Engineer : Well, it works on my Laptop
-Engineer --> Director_of_Data_Science : Would it be possible for us to collaborate in a Cloud Environment?
-Director_of_Data_Science --> Engineer : We need MLOps in the Cloud!
 
-Engineer --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
-Director_of_Data_Science --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
+rectangle historical_data
+rectangle modeling {
+    rectangle model_building
+    rectangle model_evaluation
+    rectangle model_optimization
+}
+
+rectangle prediction {
+    rectangle new_data
+    rectangle answers
+}
+
+historical_data --> modeling
+modeling --> prediction
+prediction --> modeling
+
+prediction --> historical_data
+
 
 @enduml
