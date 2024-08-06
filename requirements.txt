@@ -1,0 +1,9 @@
+pandas~=2.2.2
+numpy~=1.26.4
+pillow~=10.4.0
+matplotlib~=3.9.1
+seaborn~=0.13.2
+requests~=2.32.3
+py4j~=0.10.9.7
+databricks-cli
+databricks-connect~=15.3.1
