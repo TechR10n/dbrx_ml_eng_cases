@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+
+
+'## Task 1
+'### Read Data from Delta Table
+'Use Spark to read data from the Delta table into a DataFrame.
+'Task 2 Manage Data Permissions
+'Establish controlled access to the Telco Delta table by granting specific permissions for essential actions.
+'Grant permissions for specific actions (e.g., read, write) on the Delta table.
+
+'## Task 3: Show Summary Statistics
+'Compute and present key statistical metrics to gain a comprehensive understanding of the Telco dataset.
+'- Utilize PySpark to compute and display summary statistics for the Telco dataset.
+'+ Include key metrics such as mean, standard deviation, min, max, etc.
+
+'Task 4: Use Data Profiler to Explore DataFrame
+'Use the Data Profiler and Visualization Editor tools.
+'
+'Use the Data Profiler to explore the structure, data types, and basic statistics of the DataFrame.
+'- Task 4.1.1: Identify columns with missing values and analyze the percentage of missing data for each column.
+'- Task 4.1.2: Review the data types of each column to ensure they match expectations. Identify any columns that might need type conversion.
+'- Use Visualization Editor to Check Outliers and Data Distributions:
+'- Task 4.2.1: Create a bar chart to visualize the distribution of churned and non-churned customers.
+'- Task 4.2.2: Generate a pie chart to visualize the distribution of different contract types.
+'- Task 4.2.3: Create a scatter plot to explore the relationship between monthly charges and total charges.
+'- Task 4.2.4: Visualize the count of customers for each payment method using a bar chart.
+'- Task 4.2.5: Compare monthly charges for different contract types using a box plot.
+
+'## Task 5
+'### Drop the Column
+'Remove a specific column, enhancing data cleanliness and focus.
+'Identify the column that needs to be dropped. For example, let's say we want to drop the 'SeniorCitizen' column.
+'Use the appropriate command or method to drop the identified column from the Telco dataset.
+'Verify that the column has been successfully dropped by displaying the updated dataset.
+
+' ## Task 7
+' ### Read previous versions of the delta table
+  'Demonstrate the ability to read data from a specific version of the Delta table.
+  'Replace the timestamp in the code with the actual version or timestamp of interest.
+Director_of_Data_Science --> Engineer : It's broken, fix it, now!
+Engineer --> Director_of_Data_Science : Did you make the changes that we talked about on Tuesday?
+Director_of_Data_Science --> Engineer : No, there were more configs that the customer wanted on Wednesday \n Can we please just make it work? We have to present tomorrow?
+Engineer --> Director_of_Data_Science : Sure, the customer comes first, and customer is always right.
+Engineer --> Director_of_Data_Science : Okay, we made the fix :)
+
+Director_of_Data_Science --> Engineer : Well, it works on my Laptop
+Engineer --> Director_of_Data_Science : Would it be possible for us to collaborate in a Cloud Environment?
+Director_of_Data_Science --> Engineer : We need MLOps in the Cloud!
+
+Engineer --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
+Director_of_Data_Science --> CTO : We need a cloud service that can handle MLOps.\nPlease provide Databricks.
+
+@enduml

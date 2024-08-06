@@ -1,0 +1,18 @@
+Summary,Issue Type,Status,Project key,Project name,Priority,Description
+Dbrx ML Assoc Explore Data,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,01-Load and Explore Data.py
+Create Org chart of Personas in PlantUML,Task,Done,MLAWSDBRX,ML with AWS and Databricks,Medium,02-Build a Feature Engineering Pipeline
+Feature Engineering with Feature Store,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,03-Feature Engineering with Feature Store
+Model Development Tracking with MLFlow,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,04-Model Development Tracking with MLFlow
+Hyperparameter Tuning with HyperOpt,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,05-Hyperparameter Tuning with HyperOpt
+AutoML,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,06-AutoML
+Batch Deployment,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,07-Batch Deployment
+Inference Pipeline,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,08-Inference Pipeline
+Real-time Deployment with Model Serving,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,09-Real-time Deployment with Model Serving
+MLOPS Infrastructure Setup,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,10-MLOPS Infrastructure Setup
+MLOPS Workflows,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,11-MLOPS Workflows
+Experiment Tracking Lab,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,12-Experiment Tracking Lab
+Advanced Experiment Tracking Lab,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,13-Advanced Experiment Tracking Lab
+Model Management Lab,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,14-Model Management Lab
+Batch Deployment Lab,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,15-Batch Deployment Lab
+Real-time Deployment Lab,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,16-Real-time Deployment Lab
+Production Monitoring Lab,Task,To Do,MLAWSDBRX,ML with AWS and Databricks,Medium,17-Production Monitoring Lab
