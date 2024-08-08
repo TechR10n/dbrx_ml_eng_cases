@@ -95,7 +95,7 @@ def compute_features(spark_df):
 # MAGIC %md
 # MAGIC #### Compute Features
 # MAGIC
-# MAGIC Next, use the featurization function `compute_features` to create a DataFrame of the features.
+# MAGIC Next, use the featurize function `compute_features` to create a DataFrame of the features.
 
 # COMMAND ----------
 

@@ -1,0 +1,164 @@
+@startuml
+allowmixing
+left to right direction
+skinparam nodesep 10
+skinparam linetype polyline
+
+json batch_inference_workflow {
+    "level": "CAN_VIEW",
+    "group_name": "users"
+}
+
+abstract        abstract
+abstract class  "abstract class"
+annotation      annotation
+circle          circle
+()              circle_short_form
+class           class
+diamond         diamond
+<>              diamond_short_form
+entity          entity
+enum            enum
+exception       exception
+interface       interface
+metaclass       metaclass
+protocol        protocol
+stereotype      stereotype
+struct          struct
+object          object
+
+map map {
+ key => value
+}
+json JSON {
+   "fruit":"Apple",
+   "size":"Large",
+   "color": ["Red", "Green"]
+}
+action action
+actor actor
+actor/ "actor/"
+agent agent
+artifact artifact
+boundary boundary
+card card
+circle circle
+cloud cloud
+collections collections
+component component
+control control
+database database
+entity entity
+'file file
+folder folder
+frame frame
+hexagon hexagon
+interface interface
+label label
+package package
+person person
+process process
+queue queue
+rectangle rectangle
+stack stack
+storage storage
+usecase usecase
+usecase/ "usecase/"
+state state
+artifact artifact1
+artifact artifact2
+artifact artifact3
+artifact artifact4
+artifact artifact5
+artifact artifact6
+'artifact artifact7
+artifact artifact8
+artifact artifact9
+artifact artifact10
+
+artifact1 --> artifact2
+artifact1 --* artifact3
+artifact1 --o artifact4
+artifact1 --+ artifact5
+artifact1 --# artifact6
+'artifact1 -->> artifact7
+'artifact1 --0 artifact8
+artifact1 --^ artifact9
+'artifact1 --(0 artifact10
+
+
+'[i]
+'node nodez {
+'  portin p1
+'  portin p2
+'  portin p3
+'  portout po1
+'  portout po2
+'  portout po3
+'  file f1
+'}
+'[o]
+'
+'i --> p1
+'i --> p2
+'i --> p3
+'p1 --> f1
+'p2 --> f1
+'po1 --> o
+'po2 --> o
+'po3 --> o
+'f1 --> po1
+
+
+'folder folder [
+'This is a <b>folder
+'----
+'You can use separator
+'====
+'of different kind
+'....
+'and style
+']
+'
+'node node [
+'This is a <b>node
+'----
+'You can use separator
+'====
+'of different kind
+'....
+'and style
+']
+'
+'database database [
+'This is a <b>database
+'----
+'You can use separator
+'====
+'of different kind
+'....
+'and style
+']
+'
+'usecase usecase [
+'This is a <b>usecase
+'----
+'You can use separator
+'====
+'of different kind
+'....
+'and style
+']
+'
+'card card [
+'This is a <b>card
+'----
+'You can use separator
+'====
+'of different kind
+'....
+'and style
+'<i><color:blue>(add from V1.2020.7)</color></i>
+']
+
+@enduml

@@ -32,7 +32,7 @@ df
 
 # MAGIC %md
 # MAGIC # Leverage algo to target Imbalanced Data: 
-# MAGIC Similar featurization process as before, only now we have one label for every data entry
+# MAGIC Similar featurize process as before, only now we have one label for every data entry
 
 # COMMAND ----------
 
@@ -71,7 +71,7 @@ hashtf = HashingTF(numFeatures=2**16, inputCol="ngrams", outputCol='tf')
 idf = IDF(inputCol='tf', outputCol="features", minDocFreq=2) #minDocFreq: remove sparse terms
 label_stringIdx = StringIndexer(inputCol = "sentiment", outputCol = "label")
 
-# example of how pipelines can help us orchestrate the featurization! 
+# example of how pipelines can help us orchestrate the featurize!
 pipeline = Pipeline(stages=[hashtf, idf, label_stringIdx])
 pipelineFit = pipeline.fit(test)
 train_df = pipelineFit.transform(test)

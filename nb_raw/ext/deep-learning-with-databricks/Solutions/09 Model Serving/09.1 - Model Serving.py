@@ -105,7 +105,7 @@ print(f"Model saved to {model_uri}")
 # MAGIC %md Create a wrapper class that includes the following as a **`pyfunc`**:
 # MAGIC
 # MAGIC - A **`load_context`** method to load in the model. 
-# MAGIC - Custom featurization logic that parses base64 encoded images (necessary for HTTP requests)
+# MAGIC - Custom featurize logic that parses base64 encoded images (necessary for HTTP requests)
 # MAGIC - Custom prediction logic that reports the top class and its probability
 
 # COMMAND ----------
